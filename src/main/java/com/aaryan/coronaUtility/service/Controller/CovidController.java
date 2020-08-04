@@ -27,4 +27,5 @@ public class CovidController {
         return new ResponseEntity<>(coronaVirusDataService.getAllStats(), HttpStatus.OK);
     }
 
+
 }

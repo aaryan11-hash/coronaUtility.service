@@ -1,5 +1,6 @@
 package com.aaryan.coronaUtility.service.Config;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import org.apache.activemq.ActiveMQConnectionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +11,11 @@ import org.springframework.core.env.Environment;
 import org.springframework.jms.annotation.EnableJms;
 import org.springframework.jms.config.JmsListenerContainerFactory;
 import org.springframework.jms.config.SimpleJmsListenerContainerFactory;
+import org.springframework.jms.core.JmsMessagingTemplate;
 import org.springframework.jms.core.JmsTemplate;
+import org.springframework.jms.support.converter.MappingJackson2MessageConverter;
+import org.springframework.jms.support.converter.MessageConverter;
+import org.springframework.jms.support.converter.SimpleMessageConverter;
 
 import javax.jms.ConnectionFactory;
 
@@ -31,6 +36,7 @@ public class JmsConfig {
         connectionFactory.setUserName(environment.getProperty("activemq.username"));
         connectionFactory.setPassword(environment.getProperty("activemq.password"));
         connectionFactory.setTrustAllPackages(true);
+
         return connectionFactory;
     }
 
@@ -40,6 +46,7 @@ public class JmsConfig {
         SimpleJmsListenerContainerFactory containerFactory=new SimpleJmsListenerContainerFactory();
         containerFactory.setConnectionFactory(connectionFactory);
         containerFactory.setErrorHandler(queueHandler);
+
         return containerFactory;
     }
 
@@ -48,6 +55,14 @@ public class JmsConfig {
 
         return new JmsTemplate(connectionFactory());
     }
+
+   @Bean
+    public ObjectMapper objectMapper(){
+
+        return new ObjectMapper();
+   }
+
+
 
 
 

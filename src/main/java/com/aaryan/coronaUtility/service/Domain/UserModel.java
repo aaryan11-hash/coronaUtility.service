@@ -5,6 +5,8 @@ import org.springframework.boot.autoconfigure.domain.EntityScan;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
+import java.io.Serializable;
+import java.sql.Timestamp;
 
 @RequiredArgsConstructor
 @AllArgsConstructor
@@ -12,8 +14,11 @@ import javax.validation.constraints.*;
 @Setter
 @Data
 @Builder
+@ToString
 @Entity
 public class UserModel {
+
+
 
 
     @Id
@@ -34,6 +39,9 @@ public class UserModel {
 
     @Column(updatable = true,nullable = false,columnDefinition = "varchar(30)")
     private String pincode;
+
+    @Column(updatable = false,nullable = false,columnDefinition = "varchar(30)")
+    private String creationDate;
 
 
 
