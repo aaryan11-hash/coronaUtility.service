@@ -40,8 +40,7 @@ public class UserModel {
     @Column(updatable = true,nullable = false,columnDefinition = "varchar(30)")
     private String pincode;
 
-    @Column(updatable = false,nullable = false,columnDefinition = "varchar(30)")
-    private String creationDate;
+
 
 
 

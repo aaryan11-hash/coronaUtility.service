@@ -23,8 +23,8 @@ public class CovidController {
     @GetMapping("/casesTable")
     public ResponseEntity<List<LocationStats>> getCurrentCases(){
 
-
         return new ResponseEntity<>(coronaVirusDataService.getAllStats(), HttpStatus.OK);
+
     }
 
 

@@ -36,7 +36,7 @@ public class MailingService {
     */
 
 
-    public String sendMail(String to){
+    public boolean sendMail(String to){
 
         String token= UUID.randomUUID().toString();
 
@@ -55,10 +55,10 @@ public class MailingService {
             Transport.send(message);
 
             System.out.println("Done");
-            return token;
+            return true;
 
         } catch (MessagingException e) {
-            throw new RuntimeException(e);
+            return false;
         }
 
 

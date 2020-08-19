@@ -1,6 +1,7 @@
 package com.aaryan.coronaUtility.service.Service;
 
 import com.aaryan.coronaUtility.service.Config.JmsConfig;
+import com.aaryan.coronaUtility.service.Controller.Mappers.userModelMapper;
 import com.aaryan.coronaUtility.service.Controller.Model.UserModelDto;
 import com.aaryan.coronaUtility.service.Domain.UserModel;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -12,6 +13,7 @@ import org.springframework.jms.core.JmsMessagingTemplate;
 import org.springframework.jms.core.JmsTemplate;
 import org.springframework.jms.support.converter.MappingJackson2MessageConverter;
 import org.springframework.jms.support.converter.MessageConverter;
+import org.springframework.messaging.MessageHeaders;
 import org.springframework.messaging.handler.annotation.Headers;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.stereotype.Component;
@@ -33,10 +35,16 @@ public class JmsMessageSerivce {
     @Autowired
     private ObjectMapper objectMapper;
 
+    @Autowired
+    private userDataJPAImpl userDataJPA;
+
+    @Autowired
+    private userModelMapper userModelMapper;
+
 
 
    @JmsListener(destination = JmsConfig.CORONA_MAIL_MSG,containerFactory = "jmsListenerContainerFactory")
-   public void sendEmailToNewUser(@Payload String usermodel){
+   public void sendEmailToNewUser(@Payload String usermodel, @Headers MessageHeaders headers){
 
 
        UserModelDto userModel= null;
@@ -48,7 +56,10 @@ public class JmsMessageSerivce {
 
        System.out.println("received message");
        System.out.println(userModel);
-       mailingService.sendMail(userModel.getEmail());
+        boolean successfulMail = mailingService.sendMail(userModel.getEmail());
+
+        if(successfulMail)
+            userDataJPA.saveUserData(userModelMapper.userModelDtoToUserModel(userModel));
 
 
     }
