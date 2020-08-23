@@ -57,6 +57,9 @@ public class JmsMessageSerivce {
        System.out.println("received message");
        System.out.println(userModel);
         boolean successfulMail = mailingService.sendMail(userModel.getEmail());
+        UserModel test = userModelMapper.userModelDtoToUserModel(userModel);
+
+       System.out.println(test);
 
         if(successfulMail)
             userDataJPA.saveUserData(userModelMapper.userModelDtoToUserModel(userModel));

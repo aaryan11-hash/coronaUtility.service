@@ -18,9 +18,6 @@ import java.sql.Timestamp;
 @Entity
 public class UserModel {
 
-
-
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
