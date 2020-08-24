@@ -1,8 +1,10 @@
 package com.aaryan.coronaUtility.service.Controller;
 
 import com.aaryan.coronaUtility.service.Controller.Model.LocationStats;
+import com.aaryan.coronaUtility.service.Controller.Model.weatherApiModel.ZIP;
 import com.aaryan.coronaUtility.service.Domain.UserModel;
 import com.aaryan.coronaUtility.service.Service.CoronaVirusDataService;
+import com.aaryan.coronaUtility.service.Service.MailingService;
 import com.aaryan.coronaUtility.service.Service.userDataJPAImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -25,6 +27,9 @@ public class CovidController {
     @Autowired
     private userDataJPAImpl userDataJPA;
 
+    @Autowired
+    private MailingService mailingService;
+
     @GetMapping("/casesTable")
     public ResponseEntity<List<LocationStats>> getCurrentCases(){
 
@@ -39,6 +44,9 @@ public class CovidController {
         System.out.println(userDataJPA.getAllUsers());
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
+
+
 
 
 }
