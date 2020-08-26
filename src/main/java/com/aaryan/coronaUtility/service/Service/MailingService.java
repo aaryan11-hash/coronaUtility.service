@@ -102,7 +102,7 @@ public class MailingService {
 
     }
 
-    @Scheduled(cron = "10 12 * * SUN")
+    //todo a cron scheduler to be assigned to this function
     private  void sendEmailAlerts(){
 
         List<UserModel> subscribedUsers = userDataJPA.getAllUsers();
