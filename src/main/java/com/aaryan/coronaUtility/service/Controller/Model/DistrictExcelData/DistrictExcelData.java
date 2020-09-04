@@ -16,5 +16,11 @@ public class DistrictExcelData {
     private String totalReportedCase;
     private String reportedDate;
 
+    public DistrictExcelData setToUpperCase(){
+        this.setState(this.getState().toUpperCase());
+        this.setDistrictORCity(this.getDistrictORCity().toUpperCase());
+        return this;
+    }
+
 
 }

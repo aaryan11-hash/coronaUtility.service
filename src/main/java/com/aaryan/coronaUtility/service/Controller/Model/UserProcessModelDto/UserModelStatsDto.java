@@ -8,6 +8,8 @@ import lombok.extern.slf4j.Slf4j;
 @Builder
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class UserModelStatsDto {
 
     private String city;

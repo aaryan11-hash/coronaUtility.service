@@ -36,4 +36,9 @@ public class IndianStates {
     @JsonProperty("districtData")
     private List<DistrictData> districtData;
 
+    public IndianStates setToUpperCase(){
+        this.setState(this.getState().toUpperCase());
+        return  this;
+    }
+
 }

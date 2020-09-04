@@ -1,5 +1,6 @@
 package com.aaryan.coronaUtility.service.Service;
 
+import com.aaryan.coronaUtility.service.Controller.Model.UserProcessModelDto.UserModelStatsDto;
 import com.aaryan.coronaUtility.service.Controller.Model.weatherApiModel.ZIP;
 import com.aaryan.coronaUtility.service.Domain.UserModel;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -77,7 +78,7 @@ public class MailingService {
 
     }
 
-    public void sendEmailAlerts(String to,ZIP zip){
+    public void sendEmailAlerts(String to,UserModelStatsDto userModelStatsDto){
 
         try {
 
@@ -87,8 +88,15 @@ public class MailingService {
                     InternetAddress.parse(to));
             message.setSubject("Report Test Email");
             message.setText("Dear Customer,"
-                    + "\n This is a test mail,please ignore.\n\n"+"here are the user ZIP class contents"
-                    + zip);
+                    + "\n This is a test mail,please ignore.\n\n"+"here are the stats related to your district and state"
+                    + "\nState Confirmed Cases : "+userModelStatsDto.getStateConfirmedCases()+"\n"+
+                    "State Active Cases: "+userModelStatsDto.getStateActiveCases()+"\n"
+                    +"State Total Death Count : "+userModelStatsDto.getStateDeathCases()+"\n"
+                    +"State Recovered Cases : "+userModelStatsDto.getStateRecoveredCases()+"\n"
+                    +"Your District/City confirmed cases : "+userModelStatsDto.getDistrictConfirmedCases()+"\n"
+                    +"Your District/City previous covid cases count : "+userModelStatsDto.getTodaysCaseCount()+"\n\n\n\n\n\n"
+                    +"Services Provided by :-\n"
+                    +"Aaryan Srivastava");
 
 
             Transport.send(message);
@@ -110,8 +118,9 @@ public class MailingService {
 
         subscribedUsers.stream()
                 .forEach(user ->{
-                    ZIP currentZIP = this.coronaVirusDataService.weatherRestTemplateCall(Integer.parseInt(user.getPincode()));
-                    sendEmailAlerts(user.getEmail(),currentZIP);
+                    UserModelStatsDto userModelStatsDto = this.coronaVirusDataService.processCurrentUserDataRequest(user.getState(),user.getCity());
+                    //ZIP currentZIP = this.coronaVirusDataService.weatherRestTemplateCall(Integer.parseInt(user.getPincode()));
+                    sendEmailAlerts(user.getEmail(),userModelStatsDto);
                 });
 
 

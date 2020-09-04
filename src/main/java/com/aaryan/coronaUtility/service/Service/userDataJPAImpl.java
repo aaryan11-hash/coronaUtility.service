@@ -1,5 +1,7 @@
 package com.aaryan.coronaUtility.service.Service;
 
+import com.aaryan.coronaUtility.service.Controller.Mappers.ModelMapper;
+import com.aaryan.coronaUtility.service.Controller.Model.UserModelDto;
 import com.aaryan.coronaUtility.service.Domain.UserModel;
 import com.aaryan.coronaUtility.service.Repository.UserModelRepo;
 import lombok.RequiredArgsConstructor;
@@ -18,16 +20,20 @@ import java.util.List;
 @RequiredArgsConstructor
 public class userDataJPAImpl {
 
-    @Autowired
-    private UserModelRepo userModelRepo;
 
     @Autowired
     private EntityManager entityManager;
 
-    @Transactional
-    public void saveUserData(UserModel userModel){
+    @Autowired
+    private ModelMapper modelMapper;
 
-        userModelRepo.save(userModel);
+    @Transactional
+    public void saveUserData(UserModelDto userModelDto){
+
+        Session session = entityManager.unwrap(Session.class);
+        session.beginTransaction();
+        session.save(modelMapper.userModelDtoconvertuserModel(userModelDto));
+        session.close();
 
     }
 
@@ -40,11 +46,8 @@ public class userDataJPAImpl {
        return list;
     }
 
-    @Transactional
-    public List<UserModel> getAllUserJPA(){
 
-        return new ArrayList<>(userModelRepo.findAll());
-    }
+
 
 
 }

@@ -22,4 +22,9 @@ public class DistrictData {
 
     private Integer deaths;
 
+    public DistrictData setToUpperCase(){
+        this.setName(this.getName().toUpperCase());
+        return this;
+    }
+
 }

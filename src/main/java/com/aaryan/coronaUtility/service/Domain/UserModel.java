@@ -28,7 +28,7 @@ public class UserModel {
     @Column(updatable = true,nullable = false,columnDefinition = "varchar(30)")
     private String lastName;
 
-    @Column(updatable = true,nullable = false,columnDefinition = "varchar(30)")
+    @Column(updatable = true,nullable = false,columnDefinition = "varchar(60)")
     private String email;
 
     @Column(updatable = true,nullable = false,columnDefinition = "varchar(40)")
@@ -37,6 +37,11 @@ public class UserModel {
     @Column(updatable = true,nullable = false,columnDefinition = "varchar(30)")
     private String pincode;
 
+    @Column(updatable = true,nullable = false,columnDefinition = "varchar(30)")
+    private String state;
+
+    @Column(updatable = true,nullable = false,columnDefinition = "varchar(30)")
+    private String city;
 
 
 

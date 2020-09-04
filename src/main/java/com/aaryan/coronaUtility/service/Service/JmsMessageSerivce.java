@@ -1,26 +1,19 @@
 package com.aaryan.coronaUtility.service.Service;
 
 import com.aaryan.coronaUtility.service.Config.JmsConfig;
-import com.aaryan.coronaUtility.service.Controller.Mappers.userModelMapper;
+import com.aaryan.coronaUtility.service.Controller.Mappers.ModelMapper;
 import com.aaryan.coronaUtility.service.Controller.Model.UserModelDto;
 import com.aaryan.coronaUtility.service.Domain.UserModel;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Scope;
 import org.springframework.jms.annotation.JmsListener;
-import org.springframework.jms.core.JmsMessagingTemplate;
 import org.springframework.jms.core.JmsTemplate;
-import org.springframework.jms.support.converter.MappingJackson2MessageConverter;
-import org.springframework.jms.support.converter.MessageConverter;
 import org.springframework.messaging.MessageHeaders;
 import org.springframework.messaging.handler.annotation.Headers;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
 
 
 @Service
@@ -39,8 +32,8 @@ public class JmsMessageSerivce {
     @Autowired
     private userDataJPAImpl userDataJPA;
 
-    @Autowired
-    private userModelMapper userModelMapper;
+//    @Autowired
+//    private ModelMapper userModelMapper;
 
 
 
@@ -58,12 +51,12 @@ public class JmsMessageSerivce {
        System.out.println("received message");
        System.out.println(userModel);
         boolean successfulMail = mailingService.sendMail(userModel.getEmail());
-        UserModel test = userModelMapper.userModelDtoToUserModel(userModel);
+        //UserModel test = userModelMapper.userModelDtoconvertuserModel(userModel);
 
-       System.out.println(test);
+      // System.out.println(test);
 
-        if(successfulMail)
-            userDataJPA.saveUserData(userModelMapper.userModelDtoToUserModel(userModel));
+        //if(successfulMail)
+            //userDataJPA.saveUserData(userModelMapper.userModelDtoconvertuserModel(userModel));
 
 
     }

@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Null;
 import javax.validation.constraints.Pattern;
 import java.io.Serializable;
@@ -43,6 +44,13 @@ public class UserModelDto implements Serializable {
     @Null
     private String uuid;
 
+    @JsonProperty("state")
+    @NotNull
+    private String state;
+
+    @JsonProperty("city")
+    @NotNull
+    private String city;
 
 
 }
