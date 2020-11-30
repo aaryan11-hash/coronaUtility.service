@@ -5,13 +5,12 @@ import com.aaryan.coronaUtility.service.Controller.Model.DistrictExcelData.Distr
 import com.aaryan.coronaUtility.service.Controller.Model.IndiaStateCasesModel.DistrictData;
 import com.aaryan.coronaUtility.service.Controller.Model.IndiaStateCasesModel.IndianStates;
 import com.aaryan.coronaUtility.service.Controller.Model.LocationStats;
+import com.aaryan.coronaUtility.service.Controller.Model.UserModelDto;
 import com.aaryan.coronaUtility.service.Controller.Model.UserProcessModelDto.UserModelStatsDto;
 import com.aaryan.coronaUtility.service.Controller.Model.weatherApiModel.ZIP;
 import lombok.Getter;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVRecord;
-
-import org.checkerframework.checker.units.qual.A;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.web.client.RestTemplateBuilder;
@@ -45,7 +44,7 @@ public class CoronaVirusDataService {
     private static String VIRUS_DATA_URL="https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv";
     private  static final String WEATHER_API_KEY="2f9b645d1073cba70dcdc5be0644d341";
     private static final String INDIA_STATEWISE_DATA = "https://api.covidindiatracker.com/state_data.json";
-    private static final String INDIA_STATE_DISTRICTWISE_DATA="https://api.covid19india.org/csv/latest/raw_data14.csv";
+    private static final String INDIA_STATE_DISTRICTWISE_DATA="https://api.covid19india.org/csv/latest/raw_data19.csv";
 
     private List<LocationStats> allStats=new ArrayList<>();
     private List<DistrictExcelData> districtExcelData =new ArrayList<>();
@@ -146,12 +145,15 @@ public class CoronaVirusDataService {
                 .filter(r->r.getReportedDate().contentEquals(prevDate))
                 .forEach(r->this.yesterdayDistrictCovidCount.add(r));
 
+        System.out.println(this.yesterdayDistrictCovidCount);
+
     }
 
     public void processCovidDataOnIndia(){
 
         ResponseEntity<List<IndianStates>> list =this.restTemplate.exchange(INDIA_STATEWISE_DATA, HttpMethod.GET, null, new ParameterizedTypeReference<List<IndianStates>>(){});
         this.indianStates = list.getBody();
+        System.out.println(this.indianStates);
 
     }
 
@@ -197,6 +199,10 @@ public class CoronaVirusDataService {
 
 
             logger.warn("User Request Proccesed ===> ");
+
+
+
+
         return UserModelStatsDto.builder()
                 .stateActiveCases(indianStates.get().getActive())
                 .stateConfirmedCases(indianStates.get().getConfirmed())
@@ -204,8 +210,8 @@ public class CoronaVirusDataService {
                 .stateDeathCases(indianStates.get().getDeaths())
                 .districtConfirmedCases(districtData.get().getConfirmed())
                 .todaysCaseCount(Integer.parseInt(districtExcelData.get().getTotalReportedCase()))
-                .state(state)
-                .city(city)
+                .state(state.toUpperCase())
+                .city(city.toUpperCase())
                 .build();
 
     }

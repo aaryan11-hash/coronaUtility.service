@@ -1,11 +1,9 @@
 package com.aaryan.coronaUtility.service.Service;
 
 import com.aaryan.coronaUtility.service.Controller.Model.UserProcessModelDto.UserModelStatsDto;
-import com.aaryan.coronaUtility.service.Controller.Model.weatherApiModel.ZIP;
 import com.aaryan.coronaUtility.service.Domain.UserModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
@@ -15,7 +13,6 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -50,9 +47,9 @@ public class MailingService {
     */
 
 
-    public boolean sendMail(String to){
+    public boolean sendMail(String to,String token){
 
-        String token= UUID.randomUUID().toString();
+
 
         try {
 

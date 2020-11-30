@@ -1,12 +1,8 @@
 package com.aaryan.coronaUtility.service.Domain;
 
 import lombok.*;
-import org.springframework.boot.autoconfigure.domain.EntityScan;
 
 import javax.persistence.*;
-import javax.validation.constraints.*;
-import java.io.Serializable;
-import java.sql.Timestamp;
 
 @RequiredArgsConstructor
 @AllArgsConstructor
@@ -27,6 +23,9 @@ public class UserModel {
 
     @Column(updatable = true,nullable = false,columnDefinition = "varchar(30)")
     private String lastName;
+
+    @Column(updatable = true,nullable = false,columnDefinition = "varchar(60)")
+    private String password;
 
     @Column(updatable = true,nullable = false,columnDefinition = "varchar(60)")
     private String email;

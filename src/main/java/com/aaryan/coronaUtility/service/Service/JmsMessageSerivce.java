@@ -1,17 +1,5 @@
 package com.aaryan.coronaUtility.service.Service;
 
-import com.aaryan.coronaUtility.service.Config.JmsConfig;
-import com.aaryan.coronaUtility.service.Controller.Mappers.ModelMapper;
-import com.aaryan.coronaUtility.service.Controller.Model.UserModelDto;
-import com.aaryan.coronaUtility.service.Domain.UserModel;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jms.annotation.JmsListener;
-import org.springframework.jms.core.JmsTemplate;
-import org.springframework.messaging.MessageHeaders;
-import org.springframework.messaging.handler.annotation.Headers;
-import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
@@ -20,7 +8,7 @@ import org.springframework.stereotype.Service;
 @Component
 public class JmsMessageSerivce {
 
-    @Autowired
+  /*  @Autowired
     JmsTemplate jmsTemplate;
 
     @Autowired
@@ -60,4 +48,6 @@ public class JmsMessageSerivce {
 
 
     }
+
+   */
 }

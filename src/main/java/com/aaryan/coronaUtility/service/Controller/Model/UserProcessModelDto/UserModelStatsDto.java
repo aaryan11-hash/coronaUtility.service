@@ -2,7 +2,6 @@ package com.aaryan.coronaUtility.service.Controller.Model.UserProcessModelDto;
 
 
 import lombok.*;
-import lombok.extern.slf4j.Slf4j;
 
 @Data
 @Builder

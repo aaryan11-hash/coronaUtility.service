@@ -1,30 +1,15 @@
 package com.aaryan.coronaUtility.service.Config;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
-import org.apache.activemq.ActiveMQConnectionFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.env.Environment;
 import org.springframework.jms.annotation.EnableJms;
-import org.springframework.jms.config.JmsListenerContainerFactory;
-import org.springframework.jms.config.SimpleJmsListenerContainerFactory;
-import org.springframework.jms.core.JmsMessagingTemplate;
-import org.springframework.jms.core.JmsTemplate;
-import org.springframework.jms.support.converter.MappingJackson2MessageConverter;
-import org.springframework.jms.support.converter.MessageConverter;
-import org.springframework.jms.support.converter.SimpleMessageConverter;
-
-import javax.jms.ConnectionFactory;
 
 @Configuration
 @RequiredArgsConstructor
 @EnableJms
 public class JmsConfig {
 
-    @Autowired
+  /*  @Autowired
     private Environment environment;
 
     public static final String CORONA_MAIL_MSG="mail-send-stimulus";
@@ -62,7 +47,7 @@ public class JmsConfig {
         return new ObjectMapper();
    }
 
-
+*/
 
 
 
