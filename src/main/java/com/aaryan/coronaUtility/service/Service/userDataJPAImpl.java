@@ -35,7 +35,17 @@ public class userDataJPAImpl {
 //        session.save(modelMapper.userModelDtoconvertuserModel(userModelDto));
 //        session.close();
 
-        userModelRepo.save(modelMapper.userModelDtoconvertuserModel(userModelDto));
+        userModelRepo.save(UserModel.builder()
+        .firstName(userModelDto.getFirstName())
+        .lastName(userModelDto.getLastName())
+        .email(userModelDto.getEmail())
+        .password(userModelDto.getPassword())
+        .state(userModelDto.getState())
+        .city(userModelDto.getCity())
+        .phoneNumber(userModelDto.getPhoneNumber())
+        .pincode(userModelDto.getPincode())
+                .uuid(userModelDto.getUuid())
+              .build());
 
     }
 

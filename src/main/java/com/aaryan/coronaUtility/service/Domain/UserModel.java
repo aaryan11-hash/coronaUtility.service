@@ -33,6 +33,9 @@ public class UserModel {
     @Column(updatable = true,nullable = false,columnDefinition = "varchar(40)")
     private String phoneNumber;
 
+
+    private String uuid;
+
     @Column(updatable = true,nullable = false,columnDefinition = "varchar(30)")
     private String pincode;
 

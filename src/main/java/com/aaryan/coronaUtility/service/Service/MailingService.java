@@ -4,6 +4,7 @@ import com.aaryan.coronaUtility.service.Controller.Model.UserProcessModelDto.Use
 import com.aaryan.coronaUtility.service.Domain.UserModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
@@ -15,42 +16,20 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import java.util.List;
 import java.util.UUID;
-
 @Service
 @Component
 public class MailingService {
 
     @Autowired
     private Session session;
-
     @Autowired
     private Environment environment;
-
     @Autowired
     private userDataJPAImpl userDataJPA;
-
     @Autowired
     private CoronaVirusDataService coronaVirusDataService;
 
-
-
-    /* public String sendMail(String to){
-        String token=UUID.randomUUID().toString();
-
-        SimpleMailMessage mailMessage=new SimpleMailMessage();
-        mailMessage.setTo(to);
-        mailMessage.setSubject("Test Mail");
-        mailMessage.setText("Sample check mail. authentication checker,enter the given uuid in wesite system:: "+token);
-        mailSender.send(mailMessage);
-        return token;
-    }
-    */
-
-
     public boolean sendMail(String to,String token){
-
-
-
         try {
 
             Message message = new MimeMessage(session);
@@ -107,7 +86,7 @@ public class MailingService {
 
     }
 
-    //todo a cron scheduler to be assigned to this function
+    @Scheduled(cron = "* * * * 1 *")
     private  void sendEmailAlerts(){
 
         List<UserModel> subscribedUsers = userDataJPA.getAllUsers();

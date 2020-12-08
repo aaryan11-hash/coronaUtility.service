@@ -28,7 +28,6 @@ public class UserModelDto implements Serializable {
     private String lastName;
 
     @JsonProperty("password")
-    @NotBlank
     private String password;
 
     @JsonProperty("email")
@@ -45,7 +44,6 @@ public class UserModelDto implements Serializable {
     private String pincode;
 
     @JsonProperty("uuid")
-    @Null
     private String uuid;
 
     @JsonProperty("state")
