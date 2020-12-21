@@ -51,7 +51,7 @@ public class CoronaVirusDataService {
     private static String VIRUS_DATA_URL="https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv";
     private static final String WEATHER_API_KEY="2f9b645d1073cba70dcdc5be0644d341";
     private static final String INDIA_STATEWISE_DATA = "https://api.covidindiatracker.com/state_data.json";
-    private static final String INDIA_STATE_DISTRICTWISE_DATA="https://api.covid19india.org/csv/latest/raw_data20.csv";
+    private static final String INDIA_STATE_DISTRICTWISE_DATA="https://api.covid19india.org/csv/latest/raw_data21.csv";
     private List<LocationStats> allStats=new ArrayList<>();
     private List<WORLDCases> APIallStats = new ArrayList<>();
     private List<DistrictExcelData> districtExcelData =new ArrayList<>();
@@ -92,7 +92,7 @@ public class CoronaVirusDataService {
         String linkPostfix = ".csv";
         LinkedList<DistrictExcelData> districtExcelData = new LinkedList<>();
 
-        for(int i = 1;i<=20;i++){
+        for(int i = 1;i<=21;i++){
             HttpClient client = HttpClient.newHttpClient();
             HttpRequest request = HttpRequest.newBuilder()
                     .uri(URI.create(linkPrefix+i+linkPostfix))

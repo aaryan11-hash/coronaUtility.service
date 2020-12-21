@@ -16,6 +16,7 @@ import com.aaryan.coronaUtility.service.Service.userDataJPAImpl;
 import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMessage;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -73,13 +74,18 @@ public class CovidController {
     public ResponseEntity<UserModelStatsDto> getLiveUserRequest(@PathVariable("state") String state, @PathVariable("city") String city){
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.add("type","application/json");
+        System.out.println(state+" "+city);
         return new ResponseEntity<>(coronaVirusDataService.processCurrentUserDataRequest(state,city),httpHeaders,HttpStatus.CREATED);
     }
 
     @GetMapping("/user/{state}/{city}/{startDate}/{startmonth}/{surplus}")
     public ResponseEntity<List<DistrictExcelData>> getCustomResult(@PathVariable String state, @PathVariable String city, @PathVariable String startDate, @PathVariable String startmonth, @PathVariable int surplus){
 
-        return new ResponseEntity<>(this.coronaVirusDataService.processCustomDateResult(state,city,startDate,startmonth,surplus),HttpStatus.OK);
+        List<DistrictExcelData> finalList = this.coronaVirusDataService.processCustomDateResult(state,city,startDate,startmonth,surplus);
+        if(finalList.size()==0)
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        else
+        return new ResponseEntity<List<DistrictExcelData>>(finalList,HttpStatus.OK);
     }
 
     @PostMapping("/postUser")
