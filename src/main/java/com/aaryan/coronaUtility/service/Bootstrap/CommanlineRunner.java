@@ -8,19 +8,15 @@ import org.apache.commons.csv.CSVRecord;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
-import java.io.StringReader;
-import java.net.URI;
-import java.net.http.HttpClient;
-import java.net.http.HttpRequest;
-import java.net.http.HttpResponse;
+
 
 @RequiredArgsConstructor
 @Component
 public class CommanlineRunner implements CommandLineRunner {
 
-    private String excelSheetPrefix = "https://api.covid19india.org/csv/latest/raw_data";
-    private String excelSheetPostfix = ".csv";
-    private final ExcelSheetRepository excelSheetRepository;
+//    private String excelSheetPrefix = "https://api.covid19india.org/csv/latest/raw_data";
+//    private String excelSheetPostfix = ".csv";
+//    private final ExcelSheetRepository excelSheetRepository;
 
     @Override
     public void run(String... args) throws Exception {
