@@ -12,7 +12,7 @@
 	<artifactId>coronaUtility.service</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>coronaUtility.service</name>
-	<description>Demo project for Spring Boot</description>
+	<description>Spring Boot project for covid tracker application</description>
 
 	<properties>
 		<java.version>11</java.version>
